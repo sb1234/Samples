@@ -1,3 +1,4 @@
+import json
 import os
 import redis
 from dotenv import load_dotenv
@@ -63,19 +64,17 @@ def deleteSessionData(sessionId):
     return f"Error deleting session data for {sessionId}"
 
 
-sessionIds = {
-  'user-payment-session:1002',
-  'user-payment-session:1003',
-  'user-payment-session:1004'
-}
+fileContents = open('userData.json')
+sessionData = json.load(fileContents)
 
-createDataResults1 = createSessionData('user-payment-session:1002','50673452','Paris','Hilton','mastercard', 'Bedazzled Pink Dress', 'California, USA')
-createDataResults2 = createSessionData('user-payment-session:1003','50635536','Elton','John','visa', 'Leopard Print Suit', 'London, England')
-createDataResults3 = createSessionData('user-payment-session:1004','50745645','Blake','Shelton', 'american express', 'Cowboy hat', 'Nashville, USA')
-
-print(createDataResults1, createDataResults2, createDataResults3, sep='\n')
-
-for sessionId in sessionIds:
+for sessionId in sessionData:
+  createDataResults = createSessionData(sessionId,sessionData[sessionId]['customerId'],
+                                        sessionData[sessionId]['firstName'],
+                                        sessionData[sessionId]['lastName'],
+                                        sessionData[sessionId]['paymentType'], 
+                                        sessionData[sessionId]['productDesc'],
+                                        sessionData[sessionId]['location'])
   sessionDataResults = getSessionData(sessionId)
   deleteDataResults = deleteSessionData(sessionId)
-  print(sessionDataResults, deleteDataResults, sep='\n')
+  print(createDataResults, sessionDataResults, deleteDataResults, sep='\n')
+  print('\n')

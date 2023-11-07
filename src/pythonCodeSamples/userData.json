@@ -1,0 +1,56 @@
+{ 
+    "user-payment-session:1001":
+    { 
+        "customerId": 50673452,
+        "firstName": "Heidi", 
+        "lastName": "Klum",
+        "paymentType":"american express", 
+        "productDesc":"Plaid Purple Drindl", 
+        "location":"Munich, Germany"
+    },
+    "user-payment-session:1002":
+    { 
+        "customerId": 50673452,
+        "firstName": "Paris", 
+        "lastName": "Hilton",
+        "paymentType":"mastercard", 
+        "productDesc":"Bedazzled Pink Dress", 
+        "location":"California, USA"
+    },
+    "user-payment-session:1003":
+    { 
+        "customerId": 50635536,
+        "firstName": "Elton", 
+        "lastName": "John",
+        "paymentType":"visa", 
+        "productDesc":"Leopard Print Suit", 
+        "location":"London, England"
+    },
+    "user-payment-session:1004": 
+    { 
+        "customerId": 50745645,
+        "firstName": "Blake", 
+        "lastName": "Shelton",
+        "paymentType":"american express", 
+        "productDesc":"Cowboy hat with tassles", 
+        "location":"Nashville, USA"
+    },
+    "user-payment-session:1005": 
+    { 
+        "customerId": 50893485,
+        "firstName": "Chris", 
+        "lastName": "Rock",
+        "paymentType":"mastercard", 
+        "productDesc":"Black Leather Loafers", 
+        "location":"New York, USA"
+    },
+    "user-payment-session:1006": 
+    { 
+        "customerId": 50838596,
+        "firstName": "Victoria", 
+        "lastName": "Beckham",
+        "paymentType":"mastercard", 
+        "productDesc":"Posh black dress", 
+        "location":"Liverpool, England"
+    }
+}
