@@ -1,5 +1,5 @@
 { 
-    "user-payment-session:1001":
+    "user-purchase-session:1001":
     { 
         "customerId": 50673452,
         "firstName": "Heidi", 
@@ -8,7 +8,7 @@
         "productDesc":"Plaid Purple Drindl", 
         "location":"Munich, Germany"
     },
-    "user-payment-session:1002":
+    "user-purchase-session:1002":
     { 
         "customerId": 50673452,
         "firstName": "Paris", 
@@ -17,7 +17,7 @@
         "productDesc":"Bedazzled Pink Dress", 
         "location":"California, USA"
     },
-    "user-payment-session:1003":
+    "user-purchase-session:1003":
     { 
         "customerId": 50635536,
         "firstName": "Elton", 
@@ -26,7 +26,7 @@
         "productDesc":"Leopard Print Suit", 
         "location":"London, England"
     },
-    "user-payment-session:1004": 
+    "user-purchase-session:1004": 
     { 
         "customerId": 50745645,
         "firstName": "Blake", 
@@ -35,7 +35,7 @@
         "productDesc":"Cowboy hat with tassles", 
         "location":"Nashville, USA"
     },
-    "user-payment-session:1005": 
+    "user-purchase-session:1005": 
     { 
         "customerId": 50893485,
         "firstName": "Chris", 
@@ -44,7 +44,7 @@
         "productDesc":"Black Leather Loafers", 
         "location":"New York, USA"
     },
-    "user-payment-session:1006": 
+    "user-purchase-session:1006": 
     { 
         "customerId": 50838596,
         "firstName": "Victoria", 
