@@ -38,7 +38,6 @@ def getSessionData(sessionId):
     customerName, purchaseDesc, purchaseLocation = '', '', ''
     for key, value in userData.items():
       keyDecoded = key.decode("utf-8")
-
       if keyDecoded == 'firstName' or keyDecoded == 'lastName':
         customerName += value.decode("utf-8") + ' '
       elif keyDecoded == 'purchaseDesc':
@@ -46,7 +45,7 @@ def getSessionData(sessionId):
       elif keyDecoded == 'location':
         purchaseLocation += value.decode("utf-8")
     
-      message = f"Customer {customerName} recently bought a {purchaseDesc} within {purchaseLocation}"
+    message = f"Customer {customerName} recently bought a {purchaseDesc} within {purchaseLocation}"
   except:
     message = f"Error Retreiving User Session Data for {sessionId}"
   return message
