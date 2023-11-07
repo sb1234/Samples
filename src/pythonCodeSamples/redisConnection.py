@@ -10,52 +10,72 @@ def connectToRedis():
     port=10280,
     password=os.getenv("REDIS_PWD"))
 
-def createSessionData(sessionID, customerID, fname, lname, pmtType, pmtAmount):
-  message = 'User Session Data Created Successfully'
+def createSessionData(sessionId, customerID, fname, lname, pmtType, purchaseDesc, location):
   try:
     redisConnection = connectToRedis()
-    redisConnection.hset(sessionID, mapping={
+    redisConnection.hset(sessionId, mapping={
         'customerId': customerID,
         "firstName": fname,
         "lastName": lname,
         "paymentType": pmtType,
-        "paymentAmount": pmtAmount
+        "purchaseDesc": purchaseDesc,
+        "location": location
       })
+    return f"User Session Data Created Successfully for {sessionId}"
   except:
-    message = 'Error Creating User Session Data'
-  return message
+    return f"Error Creating User Session Data for {sessionId}"
 
-def getSessionData(sessionID):
+def getSessionData(sessionId):
   message = ''
   try:
     redisConnection = connectToRedis()
-    userData = redisConnection.hgetall(sessionID)
+    userData = redisConnection.hgetall(sessionId)
+    
+    if userData == {}:
+      return f"Unable to find Session Data for {sessionId}"
 
-    customerName = ''
-    paymentType = ''
+    customerName, purchaseDesc, purchaseLocation = '', '', ''
     for key, value in userData.items():
       keyDecoded = key.decode("utf-8")
 
       if keyDecoded == 'firstName' or keyDecoded == 'lastName':
         customerName += value.decode("utf-8") + ' '
-      elif keyDecoded == 'paymentType':
-        paymentType += value.decode("utf-8")
+      elif keyDecoded == 'purchaseDesc':
+        purchaseDesc += value.decode("utf-8")
+      elif keyDecoded == 'location':
+        purchaseLocation += value.decode("utf-8")
     
-    if(customerName == '' and paymentType == ''):
-      message = 'Unable to find User Session Data'
-    else:
-      message = f"Customer {customerName} recently paid with {paymentType}"
+      message = f"Customer {customerName} recently bought a {purchaseDesc} within {purchaseLocation}"
   except:
-    message = 'Error Retreiving User Session Data'  
-  return message  
+    message = f"Error Retreiving User Session Data for {sessionId}"
+  return message
+
+def deleteSessionData(sessionId):
+  try:
+    redisConnection = connectToRedis()
+    numDeletedSessions = redisConnection.delete(sessionId)
+
+    if numDeletedSessions > 0:
+      return f"Session data deleted successfully for {sessionId}"
+    else:
+      return f"There was no session data to delete for {sessionId}"
+  except:
+    return f"Error deleting session data for {sessionId}"
 
 
 sessionIds = {
-  'user-payment-session:12345',
-  'user-payment-session:6789',
-  'user-payment-session:92394'
+  'user-payment-session:1002',
+  'user-payment-session:1003',
+  'user-payment-session:1004'
 }
 
+createDataResults1 = createSessionData('user-payment-session:1002','50673452','Paris','Hilton','mastercard', 'Bedazzled Pink Dress', 'California, USA')
+createDataResults2 = createSessionData('user-payment-session:1003','50635536','Elton','John','visa', 'Leopard Print Suit', 'London, England')
+createDataResults3 = createSessionData('user-payment-session:1004','50745645','Blake','Shelton', 'american express', 'Cowboy hat', 'Nashville, USA')
+
+print(createDataResults1, createDataResults2, createDataResults3, sep='\n')
+
 for sessionId in sessionIds:
-  results = getSessionData(sessionId)
-  print(results)
+  sessionDataResults = getSessionData(sessionId)
+  deleteDataResults = deleteSessionData(sessionId)
+  print(sessionDataResults, deleteDataResults, sep='\n')
