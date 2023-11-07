@@ -1,9 +1,9 @@
 # About
 This is a simple code sample that connects to a Redis DB and interacts
-with provided data.
+with provided data from a json file.
 
 
-# Instalation Notes
+# Installation Notes
 Will need to have python3 or earlier installed
 Also there is an .env file accessed by load_dotenv
 
